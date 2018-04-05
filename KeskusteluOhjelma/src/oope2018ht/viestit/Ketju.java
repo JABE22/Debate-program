@@ -33,10 +33,6 @@ public class Ketju {
         
     }
 
-    public OmaLista getVastaukset() {
-        return this.vastaukset;
-    }
-
     public void lisaaVastaus(int vastattava_id, String teksti, String tiedosto) {
         // Luodaan viite aktiivisen ketjun viestiin, johon vastataan
         Viesti vastattava = (Viesti) this.vastaukset.alkio(vastattava_id);
