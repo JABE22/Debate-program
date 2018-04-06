@@ -5,6 +5,10 @@
  */
 package oope2018ht.kayttoliittyma;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import oope2018ht.apulaiset.In;
 import oope2018ht.viestit.Alue;
 
@@ -39,8 +43,13 @@ public class KayttoLiittyma {
         System.out.print("Welcome to S.O.B.\n");
         String[] syote;
         
+        // Testiajo
+        ArrayList<String> komennot = lueKomennotTiedostosta();
+        int indeksi = 0;
+        
         do { 
-            syote = komentorivi();
+            // syote = komentorivi();
+            syote = komennot.get(indeksi).split(" ", 2);
             
             switch (syote[0]) {
                 // Viestialueen komennot
@@ -60,7 +69,6 @@ public class KayttoLiittyma {
                 // Viestiketjun valinta    
                 case SELECT:
                     if (syote.length > 1) {
-                        System.out.println("Valitaan viestiketju syötteellä " + syote[1] );
                         viestialue.aktivoiKetju(syote[1]);
                         
                     } 
@@ -115,6 +123,7 @@ public class KayttoLiittyma {
                 default:
                     System.out.println("Error!");
             }
+            indeksi++;
             
         } while (!syote[0].equals(EXIT));
     }
@@ -125,6 +134,29 @@ public class KayttoLiittyma {
         String[] osat = syote.split(" ", 2);
         
         return osat;
+    }
+    
+    // Ohjelman testiajossa käytettävä metodi
+    // Lukee komennot "esimerkkidata.txt" -tiedostosta listalle
+    public static ArrayList<String> lueKomennotTiedostosta()  {
+        // Lista jonne komennot lisätään
+        ArrayList<String> komennot = new ArrayList<>();
+        
+        try {
+            File tiedosto = new File("src/esimerkkidata.txt");
+            Scanner lukija = new Scanner(tiedosto);
+            
+        
+            while (lukija.hasNextLine()) {
+                komennot.add(lukija.nextLine());
+            }
+        
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return komennot;
+       
     }
     
     public static String[] erotteleTiedostonimi() {

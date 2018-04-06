@@ -1,0 +1,21 @@
+add Paras automerkki mielestänne.
+add Mikä on sinun suosikkielokuva?
+select 1
+new Focuksella olen ajellut.
+new Lamborghini on numero uuno.
+select 2
+new James Bond on kestosuosikkini
+reply 1 Bond on historiaa :D
+select 1
+reply 2 Kenelläkään ei ole varaa!
+reply 2 Ferrari mieluummin.
+reply 3 Köyhät kyykkyyn ;D
+select 2
+reply 1 Varma valinta.
+tree
+list
+select 1
+reply 1 Hieno mies!
+tree
+list
+exit

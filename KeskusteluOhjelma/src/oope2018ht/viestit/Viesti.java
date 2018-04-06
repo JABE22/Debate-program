@@ -29,7 +29,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava {
         } else {
             this.viesti_id = tunniste;
             this.viesti_sisalto = teksti;
-            this.vastaa = null;
+            this.vastaa = vastattava;
             this.tiedosto = tiedosto;
             this.vastaukset = new OmaLista();
         }
