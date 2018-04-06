@@ -40,7 +40,7 @@ public interface Ooperoiva<T> {
      *
      * Jos parametri liittyy esimerkiksi kokonaislukuun 2 ja listan tietoalkiot
      * ovat [ 0, 3 ], on listan sisältö lisäyksen jälkeen [ 0, 2, 3 ],
-     * koska 0 < 2 < 3.
+     * koska 0 pienempi 2 pienempi 3.
      *
      * Sijoita toteuttamasi metodin yleisten kommenttien ja metodin otsikon väliin
      * annotaatio "@SuppressWarnings({"unchecked"})", jolla kääntäjälle vakuutetaan,
