@@ -54,7 +54,7 @@ public class KayttoLiittyma {
                     break;
                     
                 case CATALOG:
-                    viestialue.tulostaAlueListana();
+                    System.out.print(this.viestialue);
                     break;
                 
                 // Viestiketjun valinta    
@@ -90,9 +90,11 @@ public class KayttoLiittyma {
                     break;
                     
                 case TREE:
+                    
                     break;
                     
                 case LIST:
+                    viestialue.tulostaAktiivinenKetju();
                     break;
                     
                 case HEAD:

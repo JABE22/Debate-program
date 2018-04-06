@@ -26,6 +26,10 @@ public class Ketju {
     public Viesti getAloitusviesti() {
         return this.aloitusviesti;
     }
+    
+    public int vastauksia() {
+        return this.vastaukset.koko();
+    }
 
     public void lisaaViesti(String teksti, Tiedosto tiedosto) {
         Viesti uusi = luoViesti(teksti, null, tiedosto);
@@ -51,24 +55,25 @@ public class Ketju {
         return uusiViesti; // Palautetaan viesti
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("=\n== ").append(this.aloitusviesti);
-        
-        
-        result.append(" (").append(this.vastaukset.koko());
-        result.append(" messages)\n===\n");
+    public void tulostaListana() {
+        System.out.println("=\n== " + this.aloitusviesti 
+                + " (" + this.vastaukset.koko() + " messages)\n===");
 
-//        System.out.println("=\n" + "== " + this.vastaukset.alkio(0) + " (" 
-//                + this.vastaukset.koko() + "messages)\n===");
         if (this.vastaukset.koko() > 0) {
             int v_index = 0;
             while (v_index < this.vastaukset.koko()) {
-                result.append(this.vastaukset.alkio(v_index).toString()).append("\n");
+                System.out.println(this.vastaukset.alkio(v_index).toString());
                 v_index++;
             }
         }
-        return result.toString();
+    }
+    
+    public void tulostaKetjuPuuna() {
+        
+    }
+    
+    @Override
+    public String toString() {
+        return this.aloitusviesti + " (" + this.vastauksia() + " messages)";
     }
 }

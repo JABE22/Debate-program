@@ -34,10 +34,10 @@ public class Alue {
 
     public void lisaaViesti(String teksti, Tiedosto tiedosto) {
         if (this.viestiketjut.koko() == 0) {
-            System.out.println("Yhtään viestiketjua ei ole vielä luotu");
+            // System.out.println("Yhtään viestiketjua ei ole vielä luotu");
         } else {
             this.aktiv_vk.lisaaViesti(teksti, tiedosto);
-            System.out.println("Viesti lisätty");
+            // System.out.println("Viesti lisätty");
         }
     }
 
@@ -58,31 +58,47 @@ public class Alue {
             this.aktiv_vk = (Ketju) this.viestiketjut.alkio(0);
         } else {
             int ketju_nro = Integer.parseInt(ketju);
-            ketju_nro-=1;
+            ketju_nro -= 1;
             if (ketju_nro < 0 || ketju_nro > this.viestiketjut.koko() - 1) {
-                System.out.println("Viestiketjua ei ole luotu annetulla arvolla");
+                // System.out.println("Viestiketjua ei ole luotu annetulla arvolla");
             } else {
                 if (this.viestiketjut.alkio(ketju_nro) != null) {
                     Solmu solmu = (Solmu) this.viestiketjut.alkio(ketju_nro);
-                    this.aktiv_vk = (Ketju)solmu.alkio();
-                    System.out.println("Viestiketju aktivoitu " + this.aktiv_vk.getAloitusviesti().getTunniste());
+                    this.aktiv_vk = (Ketju) solmu.alkio();
+                    // System.out.println("Viestiketju aktivoitu " + this.aktiv_vk.getAloitusviesti().getTunniste());
                 }
             }
         }
     }
 
-    public void tulostaAlueListana() {
+    public void tulostaAlue() {
         if (!this.viestiketjut.onkoTyhja()) {
             int ketju_index = 0;
 
             while (ketju_index < this.viestiketjut.koko()) {
-                System.out.println(this.viestiketjut.alkio(ketju_index));
+                Solmu solmu = (Solmu)this.viestiketjut.alkio(ketju_index);
+                Ketju ketju = (Ketju) solmu.alkio();
+                ketju.tulostaListana();
                 ketju_index++;
             }
         }
     }
 
-    public void tulostaPuuna() {
+    public void tulostaAktiivinenKetju() {
+        this.aktiv_vk.tulostaListana();
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        int ketju_index = 0;
 
+        while (ketju_index < this.viestiketjut.koko()) {
+            result.append(this.viestiketjut.alkio(ketju_index));
+            result.append("\n");
+            ketju_index++;
+        }
+        
+        return result.toString();
     }
 }
