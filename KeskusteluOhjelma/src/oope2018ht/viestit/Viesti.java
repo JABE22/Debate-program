@@ -91,7 +91,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava {
 
     @Override
     public void lisaaVastaus(Object lisattava) throws IllegalArgumentException {
-        if (this.vastaukset.hae(lisattava) == null || lisattava == null) {
+        if (this.vastaukset == null || lisattava == null) {
             throw new IllegalArgumentException("Virhe: Viesti -> lisaaVastaus()");
         } else {
             this.vastaukset.lisaa(lisattava);

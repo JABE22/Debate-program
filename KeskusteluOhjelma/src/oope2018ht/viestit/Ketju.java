@@ -5,8 +5,8 @@
  */
 package oope2018ht.viestit;
 
+import fi.uta.csjola.oope.lista.Solmu;
 import oope2018ht.omalista.OmaLista;
-import oope2018ht.tiedostot.Kuva;
 import oope2018ht.tiedostot.Tiedosto;
 
 /**
@@ -27,36 +27,27 @@ public class Ketju {
         return this.aloitusviesti;
     }
 
-    public void lisaaViesti(String teksti, String tiedosto) {
+    public void lisaaViesti(String teksti, Tiedosto tiedosto) {
         Viesti uusi = luoViesti(teksti, null, tiedosto);
         this.vastaukset.lisaa(uusi);
         
     }
 
-    public void lisaaVastaus(int vastattava_id, String teksti, String tiedosto) {
+    public void lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
         // Luodaan viite aktiivisen ketjun viestiin, johon vastataan
-        Viesti vastattava = (Viesti) this.vastaukset.alkio(vastattava_id);
+        Solmu solmu = (Solmu) this.vastaukset.alkio(vastattava_id);
+        Viesti vastattava = (Viesti) solmu.alkio();
         Viesti vastaus = luoViesti(teksti, vastattava, tiedosto);
         // Lisätään vastausviesti vastattavan vastaukset -listalle
         vastattava.lisaaVastaus(vastaus);
+        this.vastaukset.lisaa(vastaus);
     }
 
-    private Viesti luoViesti(String teksti, Viesti vastaa, String tiedosto) {
+    private Viesti luoViesti(String teksti, Viesti vastaa, Tiedosto tiedosto) {
         // Luodaan viestin tunniste ja viesti
-        Viesti uusiViesti;
         int vastauksia = this.vastaukset.koko();
-
-        // Jos viestiin ei ole liitetty tiedostoa
-        if (tiedosto == null) {
-            uusiViesti = new Viesti(vastauksia + 1, teksti, null, null);
-
-            // Muuten luodaan uusi tiedosto
-        } else {
-            // Lisätään tänne tiedoston luonti
-            Tiedosto file = new Kuva("Kuva", 800, 640, 480);
-            uusiViesti = new Viesti(vastauksia + 1, teksti, null, file);
-        }
-
+        Viesti uusiViesti = new Viesti(vastauksia + 1, teksti, vastaa, tiedosto);
+     
         return uusiViesti; // Palautetaan viesti
     }
 

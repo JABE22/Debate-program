@@ -7,6 +7,7 @@ package oope2018ht.viestit;
 
 import fi.uta.csjola.oope.lista.Solmu;
 import oope2018ht.omalista.OmaLista;
+import oope2018ht.tiedostot.Tiedosto;
 
 /**
  *
@@ -14,7 +15,7 @@ import oope2018ht.omalista.OmaLista;
  */
 public class Alue {
 
-    private OmaLista viestiketjut;
+    private final OmaLista viestiketjut;
     private Ketju aktiv_vk;
 
     public Alue() {
@@ -23,7 +24,7 @@ public class Alue {
     }
 
     // Lisää uuden ketjun ja ensimmäisen viestin (Ketju == 1. viesti)
-    public void lisaaKetju(String teksti, String tiedosto) {
+    public void lisaaKetju(String teksti, Tiedosto tiedosto) {
         // Toistaiseksi kuitataan tiedostot null -arvolla
         Viesti aloitusviesti = new Viesti(viestiketjut.koko() + 1, teksti, null, null);
         Ketju viestiketju = new Ketju(aloitusviesti);
@@ -31,7 +32,7 @@ public class Alue {
         this.aktiv_vk = viestiketju;
     }
 
-    public void lisaaViesti(String teksti, String tiedosto) {
+    public void lisaaViesti(String teksti, Tiedosto tiedosto) {
         if (this.viestiketjut.koko() == 0) {
             System.out.println("Yhtään viestiketjua ei ole vielä luotu");
         } else {
@@ -40,7 +41,7 @@ public class Alue {
         }
     }
 
-    public void lisaaVastaus(int vastattava_id, String teksti, String tiedosto) {
+    public void lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
         this.aktiv_vk.lisaaVastaus(vastattava_id, teksti, tiedosto);
     }
 
@@ -79,7 +80,6 @@ public class Alue {
                 ketju_index++;
             }
         }
-
     }
 
     public void tulostaPuuna() {

@@ -47,7 +47,7 @@ public class KayttoLiittyma {
                 case ADD:
                     if (syote[1].contains("&")) {
                         String[] osat = syote[1].split("&");
-                        viestialue.lisaaKetju(osat[0], osat[1]);
+                        viestialue.lisaaKetju(osat[0], null /*osat[1]*/);
                     } else {
                         viestialue.lisaaKetju(syote[1], null);
                     }
@@ -70,14 +70,23 @@ public class KayttoLiittyma {
                 case NEW:
                     if (syote[1].contains("&")) {
                         String[] osat = syote[1].split("&");
-                        viestialue.lisaaViesti(osat[0], osat[1]);
+                        viestialue.lisaaViesti(osat[0], null /*osat[1]*/);
                     } else {
                         viestialue.lisaaViesti(syote[1], null);
                     }
                     break;
                     
                 case REPLY:
-                    
+                    String[] osat = syote[1].split(" ", 2);
+                    int tunniste = Integer.parseInt(osat[0]);
+                    tunniste-=1;
+                    if (osat[1].contains("&")) {
+                        // Annetaan tiedoston arvoksi null *Korjataan myöhemmin
+                        String[] viestinOsat = syote[2].split("&");
+                        viestialue.lisaaVastaus(tunniste, viestinOsat[0], null /*osat[1]*/);
+                    } else {
+                        viestialue.lisaaVastaus(tunniste, osat[1], null);
+                    }
                     break;
                     
                 case TREE:
