@@ -68,7 +68,30 @@ public class Ketju {
         }
     }
     
-    public void tulostaKetjuPuuna() {
+    public void tulostaPuuna() {
+        System.out.println("=\n== " + this.aloitusviesti 
+                + " (" + this.vastaukset.koko() + " messages)\n===");
+        
+        if (this.vastaukset.koko() > 0) {
+            int v_index = 0;
+            
+            while (v_index < this.vastaukset.koko()) {
+                Solmu solmu = (Solmu) this.vastaukset.alkio(v_index);
+                Viesti viesti = (Viesti) solmu.alkio();
+                System.out.println(viesti);
+                OmaLista viestit = viesti.getVastaukset();
+                if (viestit.koko() > 0) {
+                    int v2_index = 0;
+                    while (v2_index < viestit.koko()) {
+                        viesti = (Viesti)viestit.alkio(v_index);
+                        System.out.println("   " + viesti);
+                        v2_index++;
+                    }
+                }
+                v_index++;
+            }
+            
+        }
         
     }
     

@@ -90,11 +90,11 @@ public class KayttoLiittyma {
                     break;
                     
                 case TREE:
-                    
+                    viestialue.tulostaAktiivinenKetjuPuuna();
                     break;
                     
                 case LIST:
-                    viestialue.tulostaAktiivinenKetju();
+                    viestialue.tulostaAktiivinenKetjuListana();
                     break;
                     
                 case HEAD:

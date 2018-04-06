@@ -84,8 +84,12 @@ public class Alue {
         }
     }
 
-    public void tulostaAktiivinenKetju() {
+    public void tulostaAktiivinenKetjuListana() {
         this.aktiv_vk.tulostaListana();
+    }
+    
+    public void tulostaAktiivinenKetjuPuuna() {
+        this.aktiv_vk.tulostaPuuna();
     }
     
     @Override
