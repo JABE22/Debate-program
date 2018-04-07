@@ -93,27 +93,28 @@ public class KayttoLiittyma {
                     // Jos reply komennon lisäksi viestin toinen parametri annettu
                     if (syote.length > 1) {
                         String[] osat = syote[1].split(" ", 2);
-                        int viesti_id = tarkistaTunniste(osat[0]);
+                        int viesti_id = tarkistaTunnisteenMuoto(osat[0]);
 
-                        // Jos viestitunniste ei sallittu poistutaan
-                        if (viesti_id < 0) {
-                            break;
-                        } else {
+                        // Jos viestitunnisteen jälkeen tulee viesti
+                        if (osat.length > 1) {
+                            // Muuttuja, jolla tallennetaan onnistuuko vastaus
+                            boolean onnistuiko;
+                            // Jos viesti sisältää tiedoston
+                            if (osat[1].contains(" &")) {
+                                String[] viestinOsat = osat[1].split(" &");
+                                onnistuiko = viestialue.lisaaVastaus(viesti_id, 
+                                        viestinOsat[0], luoTiedosto(viestinOsat[1]));
 
-                            // Jos viestitunnisteen jälkeen tulee viesti
-                            if (osat.length > 1) {
-
-                                // Jos viesti sisältää tiedoston
-                                if (osat[1].contains(" &")) {
-                                    String[] viestinOsat = osat[1].split(" &");
-                                    viestialue.lisaaVastaus(viesti_id, viestinOsat[0],
-                                            luoTiedosto(viestinOsat[1]));
-
-                                } else {
-                                    viestialue.lisaaVastaus(viesti_id, osat[1], null);
-                                }
+                            } else {
+                                onnistuiko = viestialue.lisaaVastaus(viesti_id, 
+                                                                 osat[1], null);
+                            }
+                            // Jos vastaus epäonnistuu, tulostetaan "Error!"
+                            if (!onnistuiko) {
+                                System.out.println("Error!");
                             }
                         }
+
                     }
                     break;
 
@@ -150,7 +151,6 @@ public class KayttoLiittyma {
 
         } while (!syote[0].equals(EXIT));
     }
-    
 
     public static String[] komentorivi() {
         System.out.print(">");
@@ -160,16 +160,15 @@ public class KayttoLiittyma {
         return osat;
     }
 
-    public int tarkistaTunniste(String syote) {
+    public int tarkistaTunnisteenMuoto(String syote) {
         try {
             int tunniste = Integer.parseInt(syote);
             tunniste -= 1;
             return tunniste;
 
         } catch (NumberFormatException e) {
-            System.out.println("Virheellinen viestitunniste: " + e.getMessage());
+            return -1;
         }
-        return -1;
     }
 
     // Ohjelman testiajossa käytettävä metodi
@@ -193,10 +192,11 @@ public class KayttoLiittyma {
         return komennot;
 
     }
-    
-    /* Lukee syotettä vastaavan tiedoston, luo sen mukaisen Tiedosto -olion ja 
-    paluttaa sen. Käsittelee lukumuunnosvirheet ja palauttaa tällöin null
-    */ 
+
+    /* Lukee syotettä vastaavan tiedoston käyttäen apumetodia lueTiedosto(String), 
+    luo sen mukaisen Tiedosto -olion ja palauttaa sen. Käsittelee lukumuunnosvirheet 
+    ja palauttaa tällöin null
+     */
     public static Tiedosto luoTiedosto(String syote) {
         // Erotetaan tiedostopääte nimestä (.gif, .jpg jne.) ja vaihdetaan .txt     
         String[] osat = syote.split("\\.");
@@ -205,7 +205,7 @@ public class KayttoLiittyma {
         // Luetaan tiedosto käyttäen apumetodia
         String tiedoston_tiedot = lueTiedosto(oikea_tiedostomuoto);
         String[] tiedot = tiedoston_tiedot.split(" ");
-        
+
         // Jos tiedosto on kuva
         if (tiedot[0].equals("Kuva") && tiedot.length == 4) {
             try {
@@ -219,8 +219,8 @@ public class KayttoLiittyma {
             } catch (NumberFormatException e) {
                 System.out.println("Virhe: " + e.getMessage());
             }
-            
-        // Jos tiedosto on video
+
+            // Jos tiedosto on video
         } else if (tiedot[0].equals("Video") && tiedot.length == 3) {
             try {
                 // Yritetään muunnoksia
@@ -236,7 +236,7 @@ public class KayttoLiittyma {
 
         return null;
     }
-    
+
     // Lukee tekstitiedostosta ensimmäisen rivin (tiedoston tiedot)
     public static String lueTiedosto(String tiedosto) {
         try {

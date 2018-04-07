@@ -41,8 +41,12 @@ public class Alue {
         }
     }
 
-    public void lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
+    public boolean lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
+        if (this.aktiv_vk.vastauksia() < vastattava_id) {
+            return false;
+        }
         this.aktiv_vk.lisaaVastaus(vastattava_id, teksti, tiedosto);
+        return true;
     }
 
     public OmaLista getViestiketjut() {
