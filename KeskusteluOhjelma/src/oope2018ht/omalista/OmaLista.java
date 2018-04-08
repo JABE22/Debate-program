@@ -12,7 +12,14 @@ import oope2018ht.apulaiset.Ooperoiva;
 /**
  *
  * @author jarnomata
+ * 
+ * Tähän luokkaan on lisätty ainoastaan Ooperoiva- rajapinnan metodien 
+ * toteutukset. OmaLista perii LinkitettyLista -luokan julkiset metodit, 
+ * mutta "haeSolmu" -metodi on kopioitu sieltä tähän luokkaan, koska se on 
+ * asetettu yksityiseksi tuntemattomasta syystä ja katsoin sen olevan 
+ * hyödyllinen myös täällä.
  */
+
 public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
     
     
@@ -80,36 +87,47 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
 
     @Override
     public OmaLista annaAlku(int n) {
+        // Sallitun arvoalueen tarkistus
         if (n < 0 || n > this.koko() - 1) {
             return null;
         }
         
-        OmaLista lista = new OmaLista();
-        Solmu apuviite = paa();
+        OmaLista alku = new OmaLista(); // Lista valittaville alkioille
+        Solmu solmu = haeSolmu(0); // Listan ensimmäinen alkio (Solmu)
         
-        while (apuviite != null) {
-            lista.lisaa(apuviite);
-            apuviite = apuviite.seuraava();
+        int indeksi = 0;
+        while (indeksi < n) {
+            alku.lisaa(solmu);
+            solmu = solmu.seuraava();
+            indeksi++;
         }
-        return lista;
+        return alku;
     }
 
     @Override
     public OmaLista annaLoppu(int n) {
-        if (n < 0 || n > this.koko() - 1) {
+        // Otetaan viimeinen indeksi talteen muuttujaan, jotta vältytään 
+        // turhilta ja rumilta '-1' -operaatioilta.
+        int viim_indeksi = this.koko() - 1;
+        
+        // Sallitun arvoalueen tarkistus
+        if (n < 0 || n > viim_indeksi) {
             return null;
         }
         
-        OmaLista lista = new OmaLista();
-        Solmu apuviite = haeSolmu(koko - n + 1);
+        OmaLista lista = new OmaLista(); // Lista valittaville alkioille
+        Solmu solmu = haeSolmu(this.koko() - n);
         
-        while (apuviite != null) {
-            lista.lisaa(apuviite);
-            apuviite = apuviite.seuraava();
+        int indeksi = this.koko() - n;
+        while (indeksi <= viim_indeksi) {
+            lista.lisaa(solmu);
+            solmu = solmu.seuraava();
+            indeksi++;
         }
         return lista; 
     }
     
+    // Hakee parametrina annetussa paikassa olevan solmun ja palauttaa sen
     public Solmu haeSolmu(int paikka) {
       // Paikka kunnollinen.
       if (paikkaOK(paikka)) {
@@ -128,9 +146,5 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
       // Virheellinen paikka.
       else
          return null;
-    }
-    
-    public Object getAlkio(int paikka) {
-        return super.alkio(paikka);
     }
 }

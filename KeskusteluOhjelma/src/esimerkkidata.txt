@@ -18,4 +18,10 @@ select 1
 reply 1 Hieno mies!
 tree
 list
+select 2
+head 2
+tail 2
+select 1
+head 2
+tail 2
 exit

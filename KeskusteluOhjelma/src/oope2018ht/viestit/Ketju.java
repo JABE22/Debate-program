@@ -6,37 +6,65 @@
 package oope2018ht.viestit;
 
 import fi.uta.csjola.oope.lista.Solmu;
+import oope2018ht.apulaiset.Getteri;
 import oope2018ht.omalista.OmaLista;
 import oope2018ht.tiedostot.Tiedosto;
 
 /**
  *
  * @author jarnomata
+ * 
+ * Ketju -luokka kapseloi aloitusviestin, joka kuvaa ketjun aihetta sekä 
+ * OmaListan, joka sisältää ketjun aiheeseen liittyvät uudet viestit (aloitusviestit)
+ * ja niihin liittyvät vastaukset. Ketjuun lisättyjen viestien viitteet tallennetaan
+ * siis sekä tämän luokan kapseloimaan "vastaukset" -OmaListaan, että kunkin 
+ * vastaukset -listan sisältämän Viestin omaan vastaukset -listaan. Tämä helpottaa
+ * viestien hakemista, läpikäyntiä ja tulostamista.
+ * 
+ * Ketju vastaa osittain myös itsensä tulostamisesta. Tämä siksi, että vältytään
+ * turhien apumuuttujien, ylimääräisten metodien ja sitä kautta monimutkaisempien
+ * rakenteiden luomiselta.
  */
 public class Ketju {
 
-    private final Viesti aloitusviesti;
-    private final OmaLista vastaukset;
+    private final Viesti aloitusviesti; // Ketjun aiheviesti
+    private final OmaLista vastaukset; // Ketjun kaikki viestit
 
     public Ketju(Viesti aloitusViesti) {
         this.aloitusviesti = aloitusViesti;
         this.vastaukset = new OmaLista();
     }
-
+    
+    @Getteri
     public Viesti getAloitusviesti() {
         return this.aloitusviesti;
+    }
+    
+    // Palauttaa null, jos vastauksia vähemmän kuin parametrina annettu lukumäärä
+    // ts. lkm ei sallitulla alueella (lkm < 0 || lkm > vastaukset.koko())
+    public OmaLista getVanhatViestit(int lkm) {
+        return this.vastaukset.annaAlku(lkm);
+        
+    }
+    
+    // Palauttaa null, jos vastauksia vähemmän kuin parametrina annettu lukumäärä
+    // ts. lkm ei sallitulla alueella (lkm < 0 || lkm > vastaukset.koko())
+    public OmaLista getUudetViestit(int lkm) {
+        return this.vastaukset.annaLoppu(lkm);
     }
 
     public int vastauksia() {
         return this.vastaukset.koko();
     }
-
+    
+    // Lisää uuden aloitusviestin ketjuun (Ei vastausviestiä)
     public void lisaaViesti(String teksti, Tiedosto tiedosto) {
         Viesti uusi = luoViesti(teksti, null, tiedosto);
         this.vastaukset.lisaa(uusi);
 
     }
-
+    
+    // Lisää ketjuun viestin, joka vastaa aiemmin luotuun viestiin
     public void lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
         // Luodaan viite aktiivisen ketjun viestiin, johon vastataan
         Solmu solmu = (Solmu) this.vastaukset.alkio(vastattava_id);
@@ -46,39 +74,42 @@ public class Ketju {
         vastattava.lisaaVastaus(vastaus);
         this.vastaukset.lisaa(vastaus);
     }
-
+    
+    // Luo uuden viestin ja palauttaa sen
     private Viesti luoViesti(String teksti, Viesti vastaa, Tiedosto tiedosto) {
         // Luodaan viestin tunniste ja viesti
-        int vastauksia = this.vastaukset.koko();
-        Viesti uusiViesti = new Viesti(vastauksia + 1, teksti, vastaa, tiedosto);
+        Viesti uusiViesti = new Viesti(vastauksia() + 1, teksti, vastaa, tiedosto);
 
         return uusiViesti; // Palautetaan viesti
     }
-
+    
+    // Tulostaa ketjun kaikki viestit järjestyksessä
     public void tulostaListana() {
-        System.out.println("=\n== " + this.aloitusviesti
-                + " (" + this.vastaukset.koko() + " messages)\n===");
+        System.out.println("=\n== " + this + "\n===");
 
         if (this.vastaukset.koko() > 0) {
             int v_index = 0;
-            while (v_index < this.vastaukset.koko()) {
+            while (v_index < this.vastauksia()) {
                 System.out.println(this.vastaukset.alkio(v_index).toString());
                 v_index++;
             }
         }
     }
-
+    
+    /** Tulostaa ketjun viestit hierarkisesti, eli puu rakenteena.
+    * Huom! Ratkaisumallin hierarkiassa voi olla enintään kolme tasoa. Tasoja voi 
+    * lisätä jatkamalla koodin kirjoittamista tai tekemällä kokonaan uuden mallin
+    */
     public void tulostaPuuna() {
-        System.out.println("=\n== " + this.aloitusviesti
-                + " (" + this.vastaukset.koko() + " messages)\n===");
+        System.out.println("=\n== " + this + "\n===");
 
         // Tarkistetaan, onko viestejä ketjussa (Aiheviestin lisäksi)
-        if (this.vastaukset.koko() > 0) {
+        if (this.vastauksia() > 0) {
 
             // Ensimmäisen (1) tason viestien (aloitusviestien) tulostus
             Solmu solmu;
             int v_index = 0;
-            while (v_index < this.vastaukset.koko()) {
+            while (v_index < this.vastauksia()) {
                 solmu = (Solmu) this.vastaukset.alkio(v_index);
                 Viesti viesti = (Viesti) solmu.alkio();
 
@@ -99,7 +130,6 @@ public class Ketju {
                         solmu = (Solmu) viestit.alkio(v2_index);
                         viesti = (Viesti) solmu.alkio();
                         System.out.println("   " + viesti);
-                        
 
                         // Kolmannen (3) tason viestien tulostus
                         OmaLista viestit2 = viesti.getVastaukset();
@@ -110,7 +140,7 @@ public class Ketju {
                                 solmu = (Solmu) viestit2.alkio(v3_index);
                                 viesti = (Viesti) solmu.alkio();
                                 System.out.println("      " + viesti);
-                                
+
                                 v3_index++;
                             }
                         }
@@ -119,9 +149,7 @@ public class Ketju {
                 }
                 v_index++;
             }
-
         }
-
     }
 
     @Override

@@ -18,7 +18,15 @@ import oope2018ht.viestit.Alue;
 /**
  *
  * @author jarnomata
+ * 
+ * Käyttöliittymä vastaa käyttäjän syötteen lukemisesta ja syötteiden käsittelystä.
+ * Tiedostot luodaan täällä, jotta saadaan niihin liittyvät tiedot mahdollisimman
+ * nopeasti kapseloitua olion sisälle, joka tekee koodista siistimmän. Viestejä ei
+ * luoda, koska niihin liittyvän tunnisteen generointi on hankalaa täällä.
+ * Käyttöliittymä kapseloi Alue -luokan ja ohjelman toiminta perustuu sen metodien
+ * kutsumiseen.
  */
+
 public class KayttoLiittyma {
 
     // Ohjelman komennot
@@ -35,7 +43,9 @@ public class KayttoLiittyma {
     private final String FIND = "find";
     private final String EXIT = "exit";
 
-    // Ohjelman tietorakenne, jonka metodeita kutsutaan käyttöliittymästä
+    /* Ohjelman käyttämä pää-luokka, jonka metodeita kutsutaan käyttöliittymästä
+    Alue-luokkamuuttujan kautta hallitaan koko sovelluksen toimintoja.
+    */ 
     private final Alue viestialue;
 
     public KayttoLiittyma() {
@@ -73,8 +83,8 @@ public class KayttoLiittyma {
                 // Viestiketjun valinta    
                 case SELECT:
                     if (syote.length > 1) {
-                        viestialue.aktivoiKetju(syote[1]);
-
+                        int ketju_nro = lukuMuunnos(syote[1]);
+                        viestialue.aktivoiKetju(ketju_nro);
                     }
                     break;
 
@@ -93,7 +103,7 @@ public class KayttoLiittyma {
                     // Jos reply komennon lisäksi viestin toinen parametri annettu
                     if (syote.length > 1) {
                         String[] osat = syote[1].split(" ", 2);
-                        int viesti_id = tarkistaTunnisteenMuoto(osat[0]);
+                        int viesti_id = lukuMuunnos(osat[0]) - 1; // Indeksointi! (-1)
 
                         // Jos viestitunnisteen jälkeen tulee viesti
                         if (osat.length > 1) {
@@ -129,9 +139,17 @@ public class KayttoLiittyma {
                     break;
 
                 case HEAD:
+                    int lkm_vanhat = lukuMuunnos(syote[1]);
+                    if (lkm_vanhat > 0) {
+                        viestialue.tulostaAktiivisenKetjunVanhat(lkm_vanhat);
+                    }
                     break;
 
                 case TAIL:
+                    int lkm_uudet = lukuMuunnos(syote[1]);
+                    if (lkm_uudet > 0) {
+                        viestialue.tulostaAktiivisenKetjunUudet(lkm_uudet);
+                    }
                     break;
 
                 case EMPTY:
@@ -151,7 +169,10 @@ public class KayttoLiittyma {
 
         } while (!syote[0].equals(EXIT));
     }
-
+    
+    /* Käyttäjän syöttämien komentojen käsittely. Palauttaa 2 -alkioisen taulukon
+    * jonka indeksi [0] sisältää mahdollisen komennon.
+    */
     public static String[] komentorivi() {
         System.out.print(">");
         String syote = In.readString();
@@ -159,13 +180,12 @@ public class KayttoLiittyma {
 
         return osat;
     }
-
-    public int tarkistaTunnisteenMuoto(String syote) {
+    
+    // Tekee turvallisen lukumuunnoksen (String -> Integer)
+    public int lukuMuunnos(String syote) {
         try {
-            int tunniste = Integer.parseInt(syote);
-            tunniste -= 1;
-            return tunniste;
-
+            int muunnos = Integer.parseInt(syote);
+            return muunnos;
         } catch (NumberFormatException e) {
             return -1;
         }

@@ -12,11 +12,17 @@ import oope2018ht.tiedostot.Tiedosto;
 /**
  *
  * @author jarnomata
+ *
+ * Alue -luokka on ohjelman pää-luokka, jonka kautta hallitaan koko viestialueen
+ * toimintoja. Alue kapseloi OmaListan joka sisältää alueen kaikki ketjut. Tämä
+ * luokka vastaa osittain myös tulostuksista, jotka kohdistuvat aktiiviseen
+ * ketjuun.
+ *
  */
 public class Alue {
 
     private final OmaLista viestiketjut;
-    private Ketju aktiv_vk;
+    private Ketju aktiv_vk; // Viite alueen aktiivisena olevaan viestiin
 
     public Alue() {
         this.viestiketjut = new OmaLista();
@@ -32,70 +38,84 @@ public class Alue {
         this.aktiv_vk = viestiketju;
     }
 
+    // Lisää uuden viestin ketjuun (EI vastausviesti, komento "new" käyttää tätä)
     public void lisaaViesti(String teksti, Tiedosto tiedosto) {
         if (this.viestiketjut.koko() == 0) {
-            // System.out.println("Yhtään viestiketjua ei ole vielä luotu");
         } else {
-            this.aktiv_vk.lisaaViesti(teksti, tiedosto);
-            // System.out.println("Viesti lisätty");
+            if (this.aktiv_vk != null) {
+                this.aktiv_vk.lisaaViesti(teksti, tiedosto);
+            }
         }
     }
 
+    // Lisää vastauksen aiemmin luotuun viestiin (komento "reply")
     public boolean lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
+        if (this.aktiv_vk == null) {
+            return false;
+        }
+
         if (this.aktiv_vk.vastauksia() < vastattava_id) {
             return false;
         }
+
         this.aktiv_vk.lisaaVastaus(vastattava_id, teksti, tiedosto);
         return true;
     }
-
-    public OmaLista getViestiketjut() {
-        return this.viestiketjut;
-    }
-
+    
     public Viesti getViestiketju(int paikka) {
-        return (Viesti) this.viestiketjut.alkio(paikka);
-    }
-
-    public void aktivoiKetju(String ketju) {
-        if (ketju == null) {
-            this.aktiv_vk = (Ketju) this.viestiketjut.alkio(0);
-        } else {
-            int ketju_nro = Integer.parseInt(ketju);
-            ketju_nro -= 1;
-            if (ketju_nro < 0 || ketju_nro > this.viestiketjut.koko() - 1) {
-                // System.out.println("Viestiketjua ei ole luotu annetulla arvolla");
-            } else {
-                if (this.viestiketjut.alkio(ketju_nro) != null) {
-                    Solmu solmu = (Solmu) this.viestiketjut.alkio(ketju_nro);
-                    this.aktiv_vk = (Ketju) solmu.alkio();
-                    // System.out.println("Viestiketju aktivoitu " + this.aktiv_vk.getAloitusviesti().getTunniste());
-                }
-            }
+        if (this.viestiketjut.koko() > 0) {
+            return (Viesti) this.viestiketjut.alkio(paikka);
         }
+        return null;
     }
-
-    public void tulostaAlue() {
-        if (!this.viestiketjut.onkoTyhja()) {
-            int ketju_index = 0;
-
-            while (ketju_index < this.viestiketjut.koko()) {
-                Solmu solmu = (Solmu)this.viestiketjut.alkio(ketju_index);
-                Ketju ketju = (Ketju) solmu.alkio();
-                ketju.tulostaListana();
-                ketju_index++;
-            }
+    
+    // Aktivoi parametria vastaavan ketjun.
+    public void aktivoiKetju(int ketju_nro) {
+        ketju_nro-=1; // Indeksoinnin mukainen vähennys (viesti 1 paikassa [0] jne.)
+        if (this.viestiketjut.alkio(ketju_nro) != null) {
+            Solmu solmu = (Solmu) this.viestiketjut.alkio(ketju_nro);
+            this.aktiv_vk = (Ketju) solmu.alkio();
         }
     }
 
     public void tulostaAktiivinenKetjuListana() {
-        this.aktiv_vk.tulostaListana();
+        if (this.aktiv_vk != null) {
+            this.aktiv_vk.tulostaListana();
+        }
     }
-    
+
     public void tulostaAktiivinenKetjuPuuna() {
-        this.aktiv_vk.tulostaPuuna();
+        if (this.aktiv_vk != null) {
+            this.aktiv_vk.tulostaPuuna();
+        }
     }
-    
+
+    // Null -arvot käsitellään tulostaLista() -metodissa, jota tässä kutsutaan
+    public void tulostaAktiivisenKetjunVanhat(int lkm) {
+        if (this.aktiv_vk != null) {
+            tulostaLista(this.aktiv_vk.getVanhatViestit(lkm));
+        }
+    }
+
+    // Null -arvot käsitellään tulostaLista() -metodissa, jota tässä kutsutaan
+    public void tulostaAktiivisenKetjunUudet(int lkm) {
+        if (this.aktiv_vk != null) {
+            tulostaLista(this.aktiv_vk.getUudetViestit(lkm));
+        }
+    }
+
+    // Esivalitun (Metodin parametri) listan tulostus
+    public void tulostaLista(OmaLista lista) {
+        if (lista != null) {
+            Solmu solmu = lista.haeSolmu(0);
+            while (solmu != null) {
+                System.out.println(solmu);
+                solmu = solmu.seuraava();
+            }
+        }
+        // Tähän voidaan lisätä Error tulostus myöhemmin, jos tarpeen
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -106,7 +126,7 @@ public class Alue {
             result.append("\n");
             ketju_index++;
         }
-        
+
         return result.toString();
     }
 }

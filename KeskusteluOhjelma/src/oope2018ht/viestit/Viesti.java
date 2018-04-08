@@ -14,6 +14,11 @@ import oope2018ht.tiedostot.Tiedosto;
 /**
  *
  * @author jarnomata
+ * 
+ * Viesti -luokka rakentuu puhtaasti tiedon ympärille. Sisältää viisi luokka
+ * -muuttujaa, joihin voidaan asettaa tietoja settereillä ja kysyä tietoja
+ * gettereillä. Lisäksi toteutettu viestien vertailuun ja tulosteluun liittyvät
+ * metodit.
  */
 public class Viesti implements Comparable<Viesti>, Komennettava {
     
@@ -84,7 +89,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava {
     @Override
     public Object hae(Object haettava) throws IllegalArgumentException {
         if (haettava == null) {
-            throw new IllegalArgumentException("Virhe: Viesti -> Hae");
+            throw new IllegalArgumentException();
         }
         return this.vastaukset.hae(haettava);
     }
@@ -92,7 +97,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava {
     @Override
     public void lisaaVastaus(Object lisattava) throws IllegalArgumentException {
         if (this.vastaukset == null || lisattava == null) {
-            throw new IllegalArgumentException("Virhe: Viesti -> lisaaVastaus()");
+            throw new IllegalArgumentException();
         } else {
             this.vastaukset.lisaa(lisattava);
         }

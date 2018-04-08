@@ -13,7 +13,7 @@ import oope2018ht.apulaiset.Getteri;
  */
 public class Video extends Tiedosto {
     
-    private double pituus;
+    private final double pituus;
     
     
     public Video(String nimi, int koko, double pituus) {
