@@ -77,8 +77,34 @@ public class Alue {
         }
     }
     
+    // Tyhjentää aktiivisen viestiketjun viestin, joka vastaa metodin parametria
     public void tyhjennaViesti(int id) {
         this.aktiv_vk.tyhjennaViesti(id);
+    }
+    
+    // Palauttaa listan, joka sisältää kaikki viestit, joissa hakusana esiintyy
+    public void tulostaHakusanalla(String hakusana) {
+        // Uusi lista osumille ja hakualueelle
+        OmaLista loydetyt = new OmaLista(); 
+        OmaLista hakualue = this.aktiv_vk.getVastaukset(); // Siisti koodi
+        
+        if (hakualue.koko() > 0) {
+            
+            int v_index = 0;
+            while (v_index < hakualue.koko()) {
+                 // Napataan viesti muuttujaan jotta vältetään luettavuusongelmat
+                 // Menetetään tosin metodin universaalius (virhe jos muunnos ei
+                 // onnistu)
+                Viesti viesti = (Viesti) hakualue.alkio(v_index);
+                
+                if (viesti.toString().contains(hakusana)) {
+                    loydetyt.lisaa(viesti); // Jos match, lisätään listalle
+                }
+                v_index++;
+            }
+        }
+        // Tulostetaan lopuksi löydetyt käyttäen apumetodia
+        tulostaLista(loydetyt);
     }
 
     public void tulostaAktiivinenKetjuListana() {

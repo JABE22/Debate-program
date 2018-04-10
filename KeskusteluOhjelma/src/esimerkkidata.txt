@@ -17,7 +17,7 @@ tree
 list
 select 1
 reply 1 Hieno mies!
-empty 4
+empty 5
 tree
 list
 select 2
@@ -26,4 +26,6 @@ tail 2
 select 1
 head 2
 tail 2
+select 2
+find B
 exit

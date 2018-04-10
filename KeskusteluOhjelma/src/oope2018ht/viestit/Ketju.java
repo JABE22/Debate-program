@@ -39,6 +39,10 @@ public class Ketju implements Comparable<Ketju> {
         return this.aloitusviesti;
     }
     
+    public OmaLista getVastaukset() {
+        return this.vastaukset;
+    }
+    
     // Palauttaa null, jos vastauksia vähemmän kuin parametrina annettu lukumäärä
     // ts. lkm ei sallitulla alueella (lkm < 0 || lkm > vastaukset.koko())
     public OmaLista getVanhatViestit(int lkm) {

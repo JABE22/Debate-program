@@ -40,6 +40,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
         }
     }
     
+    // Getterit ja Setterit (9 kpl)
     @Getteri
     public int getTunniste() {
         return viesti_id;
@@ -85,7 +86,8 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
         this.tiedosto = tiedosto;
     }  
     
-    // Rajapinnan 'Komennettava' metodien toteutukset
+    
+    // Rajapinnan 'Komennettava' metodien toteutukset (3 kpl)
     @Override
     public Viesti hae(Viesti haettava) throws IllegalArgumentException {
         if (haettava == null) {
@@ -102,7 +104,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
             this.vastaukset.lisaa(lisattava);
         }
     }
-
+    
     @Override
     public void tyhjenna() {                  
         this.viesti_sisalto = Viesti.POISTETTUTEKSTI; // Rajapinnasta komennettava
@@ -110,10 +112,10 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
     }
     
     
-    // Vertailu ja indeksointi -metodit
+    // Vertailu ja indeksointi -metodit (3 kpl)
     @Override
     public boolean equals(Object verrattava) {
-        // Jos muuttujat sijaitsevat samassa paikassa, ovat ne samat
+        // Jos muuttujat sijaitsevat samassa paikassa, ovat ne samat (tunniste)
         if (this == verrattava) {
             return true;
         }

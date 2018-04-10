@@ -101,29 +101,7 @@ public class KayttoLiittyma {
                 case REPLY:
                     // Jos reply komennon lisäksi viestin toinen parametri annettu
                     if (syote.length > 1) {
-                        String[] osat = syote[1].split(" ", 2);
-                        int viesti_id = lukuMuunnos(osat[0]) - 1; // Indeksointi! (-1)
-
-                        // Jos viestitunnisteen jälkeen tulee viesti
-                        if (osat.length > 1) {
-                            // Muuttuja, jolla tallennetaan onnistuuko vastaus
-                            boolean onnistuiko;
-                            // Jos viesti sisältää tiedoston
-                            if (osat[1].contains(" &")) {
-                                String[] viestinOsat = osat[1].split(" &");
-                                onnistuiko = viestialue.lisaaVastaus(viesti_id,
-                                        viestinOsat[0], luoTiedosto(viestinOsat[1]));
-
-                            } else {
-                                onnistuiko = viestialue.lisaaVastaus(viesti_id,
-                                        osat[1], null);
-                            }
-                            // Jos vastaus epäonnistuu, tulostetaan "Error!"
-                            if (!onnistuiko) {
-                                System.out.println("Error!");
-                            }
-                        }
-
+                        vastaaViestiin(syote[1].split(" ", 2));
                     }
                     break;
 
@@ -136,21 +114,25 @@ public class KayttoLiittyma {
                 case LIST:
                     viestialue.tulostaAktiivinenKetjuListana();
                     break;
-
+                
+                // Aktiivisen viestiketjun alkuosan tulostus (vanhimmat)
                 case HEAD:
                     int lkm_vanhat = lukuMuunnos(syote[1]);
                     if (lkm_vanhat > 0) {
                         viestialue.tulostaAktiivisenKetjunVanhat(lkm_vanhat);
                     }
                     break;
-
+                    
+                // Aktiisvisen viestiketjun loppuosan tulostus (uusimmat)
                 case TAIL:
                     int lkm_uudet = lukuMuunnos(syote[1]);
                     if (lkm_uudet > 0) {
                         viestialue.tulostaAktiivisenKetjunUudet(lkm_uudet);
                     }
                     break;
-
+                    
+                // Tyhjentää aktiivisen viestiketjun annettua tunnistetta vastaavan
+                // viestin
                 case EMPTY:
                     if (syote.length > 1) {
                         int viesti_id = lukuMuunnos(syote[1]);
@@ -162,12 +144,19 @@ public class KayttoLiittyma {
                     }
                     break;
 
+                // Hakee viesit, joissa esiintyy käyttäjän antama hakusana
                 case FIND:
+                    if (syote.length > 1) {
+                        viestialue.tulostaHakusanalla(syote[1]);
+                    }
                     break;
-
+                
+                // Ohjelman lopetus (Käyttöliittymän sulkeminen)
                 case EXIT:
                     break;
-
+                    
+                // Oletuksena tulostetaan "Error!", jos komennon ensimmäinen osa
+                // ei vastaa mitään yllä olevista komennoista
                 default:
                     System.out.println("Error!");
             }
@@ -186,6 +175,34 @@ public class KayttoLiittyma {
         String[] osat = syote.split(" ", 2);
 
         return osat;
+    }
+    
+    // Tämä on apumetodissa, jotta käynnistä -metodi pysyy siistinä ja selkeänä
+    // Kutsutaan vain "REPLY" -komennolla.
+    public void vastaaViestiin(String[] osat) {
+        
+        int viesti_id = lukuMuunnos(osat[0]) - 1; // Indeksointi! (-1)
+
+        // Jos viestitunnisteen jälkeen tulee viesti
+        if (osat.length > 1) {
+            // Muuttuja, jolla tallennetaan onnistuuko vastaus
+            boolean onnistuiko;
+            
+            // Jos viesti sisältää tiedoston
+            if (osat[1].contains(" &")) {
+                String[] viestinOsat = osat[1].split(" &");
+                onnistuiko = viestialue.lisaaVastaus(viesti_id,
+                        viestinOsat[0], luoTiedosto(viestinOsat[1]));
+
+            } else {
+                onnistuiko = viestialue.lisaaVastaus(viesti_id,
+                        osat[1], null);
+            }
+            // Jos vastaus epäonnistuu, tulostetaan "Error!"
+            if (!onnistuiko) {
+                System.out.println("Error!");
+            }
+        }
     }
 
     // Tekee turvallisen lukumuunnoksen (String -> Integer)
