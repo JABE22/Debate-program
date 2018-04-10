@@ -73,8 +73,7 @@ public class Alue {
     public void aktivoiKetju(int ketju_nro) {
         ketju_nro-=1; // Indeksoinnin mukainen vähennys (viesti 1 paikassa [0] jne.)
         if (this.viestiketjut.alkio(ketju_nro) != null) {
-            Solmu solmu = (Solmu) this.viestiketjut.alkio(ketju_nro);
-            this.aktiv_vk = (Ketju) solmu.alkio();
+            this.aktiv_vk = (Ketju) this.viestiketjut.alkio(ketju_nro);
         }
     }
 

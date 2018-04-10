@@ -33,7 +33,7 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
         
         while (apuviite != null) {
             if (apuviite.alkio().equals(haettava)) {
-                return haettava;
+                return apuviite.alkio();
             } else {
                 apuviite = apuviite.seuraava();
             }
@@ -58,7 +58,7 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
         
         while (verrattava != null) {
             // Verrataan solmujen alkioita
-            if (verrattava.alkio().toString().compareTo(lisattava.alkio().toString()) >= 0) {
+            if (verrattava.alkio().toString().compareTo(lisattava.toString()) >= 0) {
                 // Jos lisättävä -solmun alkio järjestyksessään ennen verrattavaa, lisätään 
                 // verrattava uuden solmun seuraavaksi ja uusi solmu verrattavan 
                 // edeltävän solmun (jos on) seuraavaksi solmuksi.
@@ -80,7 +80,7 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
         }
         // Jos tullaan tänne asti, lista oli joko tyhjä tai uusi solmu oli järjestyksessään 
         // listan viimeinen. Palautetaan lopuksi true
-        lisaaLoppuun(lisattava);
+        lisaaLoppuun(lisattava.alkio());
         
         return true;
     }

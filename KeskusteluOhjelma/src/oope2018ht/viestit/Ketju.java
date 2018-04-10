@@ -5,7 +5,6 @@
  */
 package oope2018ht.viestit;
 
-import fi.uta.csjola.oope.lista.Solmu;
 import oope2018ht.apulaiset.Getteri;
 import oope2018ht.omalista.OmaLista;
 import oope2018ht.tiedostot.Tiedosto;
@@ -67,8 +66,7 @@ public class Ketju {
     // Lisää ketjuun viestin, joka vastaa aiemmin luotuun viestiin
     public void lisaaVastaus(int vastattava_id, String teksti, Tiedosto tiedosto) {
         // Luodaan viite aktiivisen ketjun viestiin, johon vastataan
-        Solmu solmu = (Solmu) this.vastaukset.alkio(vastattava_id);
-        Viesti vastattava = (Viesti) solmu.alkio();
+        Viesti vastattava = (Viesti) this.vastaukset.alkio(vastattava_id);
         Viesti vastaus = luoViesti(teksti, vastattava, tiedosto);
         // Lisätään vastausviesti vastattavan vastaukset -listalle
         vastattava.lisaaVastaus(vastaus);
@@ -107,11 +105,9 @@ public class Ketju {
         if (this.vastauksia() > 0) {
 
             // Ensimmäisen (1) tason viestien (aloitusviestien) tulostus
-            Solmu solmu;
             int v_index = 0;
             while (v_index < this.vastauksia()) {
-                solmu = (Solmu) this.vastaukset.alkio(v_index);
-                Viesti viesti = (Viesti) solmu.alkio();
+                Viesti viesti = (Viesti) this.vastaukset.alkio(v_index);
 
                 // Tulostetaan vain viestit jotka eivät ole vastauksia
                 if (viesti.getVastaa() != null) {
@@ -127,8 +123,7 @@ public class Ketju {
                     // Toisen (2) tason viestien tulostus
                     int v2_index = 0;
                     while (v2_index < viestit.koko()) {
-                        solmu = (Solmu) viestit.alkio(v2_index);
-                        viesti = (Viesti) solmu.alkio();
+                        viesti = (Viesti) viestit.alkio(v2_index);
                         System.out.println("   " + viesti);
 
                         // Kolmannen (3) tason viestien tulostus
@@ -137,8 +132,7 @@ public class Ketju {
 
                             int v3_index = 0;
                             while (v3_index < viestit2.koko()) {
-                                solmu = (Solmu) viestit2.alkio(v3_index);
-                                viesti = (Viesti) solmu.alkio();
+                                viesti = (Viesti) viestit2.alkio(v3_index);
                                 System.out.println("      " + viesti);
 
                                 v3_index++;

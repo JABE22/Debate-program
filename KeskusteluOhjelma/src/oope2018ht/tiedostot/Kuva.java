@@ -18,10 +18,16 @@ public class Kuva extends Tiedosto {
     private int korkeus_px;
     
     
-    public Kuva(String nimi, int koko, int leveys, int korkeus) {
+    public Kuva(String nimi, int koko, int leveys, int korkeus) throws IllegalArgumentException {
+        
         super(nimi, koko);
-        this.leveys_px = leveys;
-        this.korkeus_px = korkeus;
+        
+        if (leveys < 1 || korkeus < 1) {
+            throw new IllegalArgumentException();
+        } else {
+            this.leveys_px = leveys;
+            this.korkeus_px = korkeus;
+        }
     }
     
     @Getteri
@@ -37,7 +43,7 @@ public class Kuva extends Tiedosto {
     @Setteri
     public void setLeveys(int uusiLeveys) {
         if (uusiLeveys < 1) {
-            throw new IllegalArgumentException("Kuvan leveys ei kelpaa");
+            throw new IllegalArgumentException();
         } else {
             this.leveys_px = uusiLeveys;
         }
@@ -46,7 +52,7 @@ public class Kuva extends Tiedosto {
     @Setteri
     public void setKorkeus(int uusiKorkeus) {
         if (uusiKorkeus < 1) {
-            throw new IllegalArgumentException("Kuvan korkeus ei kelpaa");
+            throw new IllegalArgumentException();
         } else {
             this.korkeus_px = uusiKorkeus;
         }

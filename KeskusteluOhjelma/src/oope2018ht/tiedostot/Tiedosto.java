@@ -14,12 +14,12 @@ import oope2018ht.apulaiset.Setteri;
  */
 public abstract class Tiedosto {
     
-    protected String tiedosto_nimi;
-    protected int koko_tavua;
+    private String tiedosto_nimi;
+    private int koko_tavua;
     
     public Tiedosto(String nimi, int koko) throws IllegalArgumentException {
-        if (koko < 1 || nimi.isEmpty()) {
-            throw new IllegalArgumentException("Tiedostonimi tai koko ei kelpaa");
+        if (koko < 1 || nimi == null) {
+            throw new IllegalArgumentException();
         } else {
             this.koko_tavua = koko;
         }
@@ -39,7 +39,7 @@ public abstract class Tiedosto {
     @Setteri
     public void setNimi(String nimi) throws IllegalArgumentException {
         if (nimi.isEmpty()) {
-            throw new IllegalArgumentException("Annettu tiedostonimi ei kelpaa");
+            throw new IllegalArgumentException();
         } else {
             this.tiedosto_nimi = nimi;
         }
@@ -48,7 +48,7 @@ public abstract class Tiedosto {
     @Setteri
     public void setKoko(int koko) throws IllegalArgumentException {
         if (koko < 1) {
-            throw new IllegalArgumentException("Annettu tiedostokoko ei kelpaa");
+            throw new IllegalArgumentException();
         } else {
             this.koko_tavua = koko;
         }
