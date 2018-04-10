@@ -20,8 +20,8 @@ import oope2018ht.apulaiset.Ooperoiva;
  * hyödyllinen myös täällä.
  */
 
-public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
-    
+public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista>, 
+                                                Comparable<OmaLista> {
     
     public OmaLista() {
         
@@ -47,40 +47,26 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
     public boolean lisaa(Object uusi) {
         // Palautetaan heti false, jos lisättävä objekti on null -arvo tai sitä
         // ei voida vertailla (ei toteuta rajapintaa Comparable)
-        if (uusi == null) {
+        if (uusi == null || !(uusi instanceof Comparable)) {
             return false;
         }
         
         // Verrattava solmu on aluksi pää -solmu
         Solmu verrattava = this.paa();
-        Solmu lisattava = new Solmu(uusi);
-        Solmu edeltava = null;
         
-        while (verrattava != null) {
-            // Verrataan solmujen alkioita
-            if (verrattava.alkio().toString().compareTo(lisattava.toString()) >= 0) {
-                // Jos lisättävä -solmun alkio järjestyksessään ennen verrattavaa, lisätään 
-                // verrattava uuden solmun seuraavaksi ja uusi solmu verrattavan 
-                // edeltävän solmun (jos on) seuraavaksi solmuksi.
-                lisattava.seuraava(verrattava);
-                
-                // Jos edeltava tässä vaiheessa null, on uusi eli lisättävä solmu
-                // listan ensimmäinen solmu, jolloin alla olevaa ei tehdä.
-                if (edeltava != null) {
-                    edeltava.seuraava(lisattava);
-                }
-                
-                koko++;
+        // Selataan lista läpi indeksi-perusteisesti
+        int indeksi = 0;
+        while (indeksi < koko() && verrattava != null) {
+            if (verrattava.alkio().toString().compareTo(uusi.toString()) >= 0) {
+                super.lisaa(indeksi, uusi);
                 return true;
-                
-            } else {
-                edeltava = verrattava;
-                verrattava = verrattava.seuraava();
             }
+            verrattava = verrattava.seuraava();
+            indeksi++;
         }
         // Jos tullaan tänne asti, lista oli joko tyhjä tai uusi solmu oli järjestyksessään 
         // listan viimeinen. Palautetaan lopuksi true
-        lisaaLoppuun(lisattava.alkio());
+        lisaaLoppuun(uusi);
         
         return true;
     }
@@ -88,16 +74,17 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
     @Override
     public OmaLista annaAlku(int n) {
         // Sallitun arvoalueen tarkistus
-        if (n < 0 || n > this.koko() - 1) {
+        if (n < 1 || n > this.koko()) {
             return null;
         }
         
         OmaLista alku = new OmaLista(); // Lista valittaville alkioille
-        Solmu solmu = haeSolmu(0); // Listan ensimmäinen alkio (Solmu)
+        Solmu solmu = this.paa(); // Aloitus -alkio (Solmu)
         
+        // Indeksiperustainen OmaListan läpikäynti
         int indeksi = 0;
         while (indeksi < n) {
-            alku.lisaa(solmu);
+            alku.lisaa(solmu.alkio());
             solmu = solmu.seuraava();
             indeksi++;
         }
@@ -106,21 +93,19 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
 
     @Override
     public OmaLista annaLoppu(int n) {
-        // Otetaan viimeinen indeksi talteen muuttujaan, jotta vältytään 
-        // turhilta ja rumilta '-1' -operaatioilta.
-        int viim_indeksi = this.koko() - 1;
-        
         // Sallitun arvoalueen tarkistus
-        if (n < 0 || n > viim_indeksi) {
+        if (n < 1 || n > this.koko()) {
             return null;
         }
         
         OmaLista lista = new OmaLista(); // Lista valittaville alkioille
-        Solmu solmu = haeSolmu(this.koko() - n);
+        Solmu solmu = haeSolmu(this.koko() - n); // Solmu aloituskohdasta
         
+        
+        // Indeksiperustainen OmaListan läpikäynti
         int indeksi = this.koko() - n;
-        while (indeksi <= viim_indeksi) {
-            lista.lisaa(solmu);
+        while (indeksi < this.koko()) {
+            lista.lisaa(solmu.alkio());
             solmu = solmu.seuraava();
             indeksi++;
         }
@@ -146,5 +131,10 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista> {
       // Virheellinen paikka.
       else
          return null;
+    }
+
+    @Override
+    public int compareTo(OmaLista ol) {
+         return this.koko - ol.koko();
     }
 }

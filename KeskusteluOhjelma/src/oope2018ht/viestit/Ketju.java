@@ -24,7 +24,7 @@ import oope2018ht.tiedostot.Tiedosto;
  * turhien apumuuttujien, ylimääräisten metodien ja sitä kautta monimutkaisempien
  * rakenteiden luomiselta.
  */
-public class Ketju {
+public class Ketju implements Comparable<Ketju> {
 
     private final Viesti aloitusviesti; // Ketjun aiheviesti
     private final OmaLista vastaukset; // Ketjun kaikki viestit
@@ -149,5 +149,10 @@ public class Ketju {
     @Override
     public String toString() {
         return this.aloitusviesti + " (" + this.vastauksia() + " messages)";
+    }
+
+    @Override
+    public int compareTo(Ketju k) {
+        return aloitusviesti.getTunniste() - k.getAloitusviesti().getTunniste();
     }
 }
