@@ -76,6 +76,10 @@ public class Alue {
             this.aktiv_vk = (Ketju) this.viestiketjut.alkio(ketju_nro);
         }
     }
+    
+    public void tyhjennaViesti(int id) {
+        this.aktiv_vk.tyhjennaViesti(id);
+    }
 
     public void tulostaAktiivinenKetjuListana() {
         if (this.aktiv_vk != null) {

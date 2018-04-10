@@ -9,6 +9,7 @@ reply 1 Bond on historiaa :D
 select 1
 reply 2 Kenelläkään ei ole varaa!
 reply 2 Ferrari mieluummin. &platinum.jpg
+reply 4 Homot ajaa!
 reply 3 Köyhät kyykkyyn ;D
 select 2
 reply 1 Varma valinta. &picard_facepalm.webm
@@ -16,6 +17,7 @@ tree
 list
 select 1
 reply 1 Hieno mies!
+empty 4
 tree
 list
 select 2

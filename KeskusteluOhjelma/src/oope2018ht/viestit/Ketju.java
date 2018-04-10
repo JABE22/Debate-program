@@ -81,6 +81,16 @@ public class Ketju implements Comparable<Ketju> {
         return uusiViesti; // Palautetaan viesti
     }
     
+    public void tyhjennaViesti(int id) {
+        // Muutetaan tunniste vastaamaan indeksiä
+        int viesti_indeksi = id - 1;
+        Viesti tyhjennettava = (Viesti) this.vastaukset.alkio(viesti_indeksi);
+        
+        if (!(tyhjennettava == null)) {
+            tyhjennettava.tyhjenna();
+        }
+    }
+    
     // Tulostaa ketjun kaikki viestit järjestyksessä
     public void tulostaListana() {
         System.out.println("=\n== " + this + "\n===");

@@ -18,15 +18,14 @@ import oope2018ht.viestit.Alue;
 /**
  *
  * @author jarnomata
- * 
- * Käyttöliittymä vastaa käyttäjän syötteen lukemisesta ja syötteiden käsittelystä.
- * Tiedostot luodaan täällä, jotta saadaan niihin liittyvät tiedot mahdollisimman
- * nopeasti kapseloitua olion sisälle, joka tekee koodista siistimmän. Viestejä ei
- * luoda, koska niihin liittyvän tunnisteen generointi on hankalaa täällä.
- * Käyttöliittymä kapseloi Alue -luokan ja ohjelman toiminta perustuu sen metodien
- * kutsumiseen.
+ *
+ * Käyttöliittymä vastaa käyttäjän syötteen lukemisesta ja syötteiden
+ * käsittelystä. Tiedostot luodaan täällä, jotta saadaan niihin liittyvät tiedot
+ * mahdollisimman nopeasti kapseloitua olion sisälle, joka tekee koodista
+ * siistimmän. Viestejä ei luoda, koska niihin liittyvän tunnisteen generointi
+ * on hankalaa täällä. Käyttöliittymä kapseloi Alue -luokan ja ohjelman toiminta
+ * perustuu sen metodien kutsumiseen.
  */
-
 public class KayttoLiittyma {
 
     // Ohjelman komennot
@@ -45,7 +44,7 @@ public class KayttoLiittyma {
 
     /* Ohjelman käyttämä pää-luokka, jonka metodeita kutsutaan käyttöliittymästä
     Alue-luokkamuuttujan kautta hallitaan koko sovelluksen toimintoja.
-    */ 
+     */
     private final Alue viestialue;
 
     public KayttoLiittyma() {
@@ -112,12 +111,12 @@ public class KayttoLiittyma {
                             // Jos viesti sisältää tiedoston
                             if (osat[1].contains(" &")) {
                                 String[] viestinOsat = osat[1].split(" &");
-                                onnistuiko = viestialue.lisaaVastaus(viesti_id, 
+                                onnistuiko = viestialue.lisaaVastaus(viesti_id,
                                         viestinOsat[0], luoTiedosto(viestinOsat[1]));
 
                             } else {
-                                onnistuiko = viestialue.lisaaVastaus(viesti_id, 
-                                                                 osat[1], null);
+                                onnistuiko = viestialue.lisaaVastaus(viesti_id,
+                                        osat[1], null);
                             }
                             // Jos vastaus epäonnistuu, tulostetaan "Error!"
                             if (!onnistuiko) {
@@ -153,6 +152,14 @@ public class KayttoLiittyma {
                     break;
 
                 case EMPTY:
+                    if (syote.length > 1) {
+                        int viesti_id = lukuMuunnos(syote[1]);
+                        if (viesti_id > 0) {
+                            viestialue.tyhjennaViesti(viesti_id);
+                        }
+                    } else {
+                        System.out.println("Error!");
+                    }
                     break;
 
                 case FIND:
@@ -169,10 +176,10 @@ public class KayttoLiittyma {
 
         } while (!syote[0].equals(EXIT));
     }
-    
+
     /* Käyttäjän syöttämien komentojen käsittely. Palauttaa 2 -alkioisen taulukon
     * jonka indeksi [0] sisältää mahdollisen komennon.
-    */
+     */
     public static String[] komentorivi() {
         System.out.print(">");
         String syote = In.readString();
@@ -180,7 +187,7 @@ public class KayttoLiittyma {
 
         return osat;
     }
-    
+
     // Tekee turvallisen lukumuunnoksen (String -> Integer)
     public int lukuMuunnos(String syote) {
         try {

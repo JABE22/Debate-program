@@ -20,7 +20,7 @@ import oope2018ht.tiedostot.Tiedosto;
  * gettereillä. Lisäksi toteutettu viestien vertailuun ja tulosteluun liittyvät
  * metodit.
  */
-public class Viesti implements Comparable<Viesti>, Komennettava {
+public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
     
     private int viesti_id;
     private String viesti_sisalto;
@@ -87,15 +87,15 @@ public class Viesti implements Comparable<Viesti>, Komennettava {
     
     // Rajapinnan 'Komennettava' metodien toteutukset
     @Override
-    public Object hae(Object haettava) throws IllegalArgumentException {
+    public Viesti hae(Viesti haettava) throws IllegalArgumentException {
         if (haettava == null) {
             throw new IllegalArgumentException();
         }
-        return this.vastaukset.hae(haettava);
+        return (Viesti) this.vastaukset.hae(haettava);
     }
 
     @Override
-    public void lisaaVastaus(Object lisattava) throws IllegalArgumentException {
+    public void lisaaVastaus(Viesti lisattava) throws IllegalArgumentException {
         if (this.vastaukset == null || lisattava == null) {
             throw new IllegalArgumentException();
         } else {
@@ -104,8 +104,9 @@ public class Viesti implements Comparable<Viesti>, Komennettava {
     }
 
     @Override
-    public void tyhjenna() {
-        this.viesti_sisalto = Viesti.POISTETTUTEKSTI;
+    public void tyhjenna() {                  
+        this.viesti_sisalto = Viesti.POISTETTUTEKSTI; // Rajapinnasta komennettava
+        this.tiedosto = null;
     }
     
     
