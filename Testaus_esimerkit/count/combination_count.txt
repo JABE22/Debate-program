@@ -1,0 +1,23 @@
+Welcome to S.O.B.
+>catalog
+>add We count to ten.
+>catalog
+#1 We count to ten. (0 messages)
+>new one
+>reply 1 two
+>reply 1 three
+>reply 1 four
+>reply 1 nineteen &banana.gif
+>tree
+=
+== #1 We count to ten. (5 messages)
+===
+#1 one
+   #2 two
+   #3 three
+   #4 four
+   #5 nineteen (banana.gif 1296000 B 450x360)
+>catalog
+#1 We count to ten. (5 messages)
+>exit
+Bye! See you soon.

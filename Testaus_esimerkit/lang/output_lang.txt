@@ -1,0 +1,70 @@
+Welcome to S.O.B.
+>>>>>>#1 Java
+>#1 Java
+#2 C++
+>#1 Java
+#2 C++
+#3 Python beats both. Python rules!
+>#1 Java
+#2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>#4 It pays to be multilingual.
+>#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>#2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>#1 Java
+#2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 Java
+   #2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>>#1 Java
+>#2 C++
+>#1 Java
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>>=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>>=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 ----------
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>>=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 ----------
+#3 ----------
+#4 It pays to be multilingual.
+>>=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 ----------
+#3 ----------
+#4 ----------
+>=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+#2 ----------
+#3 ----------
+#4 ----------
+>#1 What programming language should I learn? (4 messages)
+>Bye! See you soon.

@@ -1,0 +1,44 @@
+Welcome to S.O.B.
+>>>#1 What is the best chemical element? And why it is gold? (1 messages)
+>>>=
+== #1 What is the best chemical element? And why it is gold? (3 messages)
+===
+#1 Nothing compares to gold. (au.gif 307200 B 640x480)
+   #2 Gold is for pleps.
+   #3 Platinum is the best element! (platinum.jpg 73136 B 1000x800)
+>>>=
+== #1 What is the best chemical element? And why it is gold? (5 messages)
+===
+#1 Nothing compares to gold. (au.gif 307200 B 640x480)
+   #2 Gold is for pleps.
+      #5 You mispelled plebs. (picard_facepalm.webm 1048576 B 10.5 s)
+   #3 Platinum is the best element! (platinum.jpg 73136 B 1000x800)
+#4 Hydrogen is the number one.
+>>=
+== #1 What is the best chemical element? And why it is gold? (5 messages)
+===
+#1 Nothing compares to gold. (au.gif 307200 B 640x480)
+#2 ----------
+#3 Platinum is the best element! (platinum.jpg 73136 B 1000x800)
+#4 Hydrogen is the number one.
+#5 You mispelled plebs. (picard_facepalm.webm 1048576 B 10.5 s)
+>#1 Nothing compares to gold. (au.gif 307200 B 640x480)
+>#5 You mispelled plebs. (picard_facepalm.webm 1048576 B 10.5 s)
+>#1 Nothing compares to gold. (au.gif 307200 B 640x480)
+>>#1 What is the best chemical element? And why it is gold? (5 messages)
+#2 For testing purposes only (0 messages)
+>>>>=
+== #2 For testing purposes only (2 messages)
+===
+#6 testing, testing, 1, 2, 3
+#7 icicles
+>>>=
+== #1 What is the best chemical element? And why it is gold? (6 messages)
+===
+#1 Nothing compares to gold. (au.gif 307200 B 640x480)
+   #2 ----------
+      #5 You mispelled plebs. (picard_facepalm.webm 1048576 B 10.5 s)
+         #8 you misspelled mispelled
+   #3 Platinum is the best element! (platinum.jpg 73136 B 1000x800)
+#4 Hydrogen is the number one.
+>Bye! See you soon.

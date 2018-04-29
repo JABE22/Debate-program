@@ -1,0 +1,24 @@
+add What is the best chemical element? And why it is gold?
+new Nothing compares to gold. &au.gif
+catalog
+reply 1 Gold is for pleps.
+reply 1 Platinum is the best element! &platinum.jpg
+tree
+new Hydrogen is the number one.
+reply 2 You mispelled plebs. &picard_facepalm.webm
+tree
+empty 2
+list
+head 1
+tail 1
+find gif
+add For testing purposes only
+catalog
+select 2
+new testing, testing, 1, 2, 3
+new icicles
+tree
+select 1
+reply 5 you misspelled mispelled
+tree
+exit

@@ -28,7 +28,7 @@ public class KayttoLiittyma {
      * Ohjelman testaukseen liittyvät komponentit
      */
     //Testiajon tiedosto, josta luetaan komennot
-    private final String FILE = "src/input_count.txt";
+    private final String FILE = "test/input_banana.txt";
     private final ArrayList<String> komennot; // Lista komennoille
     private int komento_nro; // Komentolistan indeksimuuttuja
 
@@ -183,7 +183,7 @@ public class KayttoLiittyma {
      */
     public String[] komentorivi() {
         System.out.print(">");
-        // String syote = In.readString();
+        //String syote = In.readString();
         /* Testiajon metodi */
         String syote = getKomento();
         String[] osat = syote.split(" ", 2);
@@ -365,8 +365,8 @@ public class KayttoLiittyma {
      * tiedostoon liittyviä tietoja.
      */
     public static String lueTiedosto(String tiedosto) {
-        try {    // Muutettava, jos lukee tiedostoja muusta sijainnista
-            File tiedosto_txt = new File("src/oope2018ht/" + tiedosto);
+        try {                        // local tiedostopolku
+            File tiedosto_txt = new File("test/test_files/" + tiedosto);
             Scanner lukija = new Scanner(tiedosto_txt);
             String tieto_rivi = lukija.nextLine();
             return tieto_rivi;
@@ -406,7 +406,7 @@ public class KayttoLiittyma {
                 return kuva;
 
             } catch (NumberFormatException e) {
-                // Ei tehdä mitään
+                return null;// Ei tehdä mitään
             }
 
             // Jos tiedosto on video
@@ -419,7 +419,7 @@ public class KayttoLiittyma {
                 return video;
 
             } catch (NumberFormatException e) {
-                // Ei tehdä mitään
+                return null;// Ei tehdä mitään
             }
         }
         return null;

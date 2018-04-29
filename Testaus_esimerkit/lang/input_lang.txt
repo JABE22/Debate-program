@@ -1,0 +1,29 @@
+add What programming language should I learn?
+new Java
+reply 1 C++
+new Python beats both. Python rules!
+new It pays to be multilingual.
+head 1
+head 2
+head 3
+head 4
+tail 1
+tail 2
+tail 3
+tail 4
+tree
+find java
+find Java
+find C++
+find a
+empty 1
+tree
+empty 2
+tree
+empty 3
+tree
+empty 4
+tree
+list
+catalog
+exit

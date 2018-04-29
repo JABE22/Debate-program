@@ -1,0 +1,42 @@
+Welcome to S.O.B.
+>add What is the best chemical element? And why it is gold?
+>catalog
+#1 What is the best chemical element? And why it is gold? (0 messages)
+>add For testing purposes only
+>catalog
+#1 What is the best chemical element? And why it is gold? (0 messages)
+#2 For testing purposes only (0 messages)
+>add Hey, guys, there is a sni-
+>catalog
+#1 What is the best chemical element? And why it is gold? (0 messages)
+#2 For testing purposes only (0 messages)
+#3 Hey, guys, there is a sni- (0 messages)
+>add No YLYL thread. What is wrong with you?
+>catalog
+#1 What is the best chemical element? And why it is gold? (0 messages)
+#2 For testing purposes only (0 messages)
+#3 Hey, guys, there is a sni- (0 messages)
+#4 No YLYL thread. What is wrong with you? (0 messages)
+>select 2
+>select 4
+>select 3
+>select 1
+>select 0
+Error!
+>select 5
+Error!
+>select x
+Error!
+>select
+Error!
+>select all
+Error!
+>select 1 2 3
+Error!
+>catalog
+#1 What is the best chemical element? And why it is gold? (0 messages)
+#2 For testing purposes only (0 messages)
+#3 Hey, guys, there is a sni- (0 messages)
+#4 No YLYL thread. What is wrong with you? (0 messages)
+>exit
+Bye! See you soon.

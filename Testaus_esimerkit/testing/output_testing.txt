@@ -1,0 +1,16 @@
+Welcome to S.O.B.
+>>#1 For testing purposes only (0 messages)
+>>>>>>>>>>=
+== #1 For testing purposes only (9 messages)
+===
+#1 The
+#2 quick
+#3 brown
+#4 fox
+#5 jumps
+#6 over
+#7 the
+#8 lazy
+#9 dog
+>#1 For testing purposes only (9 messages)
+>Bye! See you soon.

@@ -1,0 +1,12 @@
+Welcome to S.O.B.
+>>>#1 We count to ten. (0 messages)
+>>>>>>=
+== #1 We count to ten. (5 messages)
+===
+#1 one
+   #2 two
+   #3 three
+   #4 four
+   #5 nineteen (banana.gif 1296000 B 450x360)
+>#1 We count to ten. (5 messages)
+>Bye! See you soon.

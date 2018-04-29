@@ -1,0 +1,99 @@
+Welcome to S.O.B.
+>add What programming language should I learn?
+>new Java
+>reply 1 C++
+>new Python beats both. Python rules!
+>new It pays to be multilingual.
+>head 1
+#1 Java
+>head 2
+#1 Java
+#2 C++
+>head 3
+#1 Java
+#2 C++
+#3 Python beats both. Python rules!
+>head 4
+#1 Java
+#2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>tail 1
+#4 It pays to be multilingual.
+>tail 2
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>tail 3
+#2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>tail 4
+#1 Java
+#2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>tree
+=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 Java
+   #2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>find java
+>find Java
+#1 Java
+>find C++
+#2 C++
+>find a
+#1 Java
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>empty 1
+>tree
+=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 C++
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>empty 2
+>tree
+=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 ----------
+#3 Python beats both. Python rules!
+#4 It pays to be multilingual.
+>empty 3
+>tree
+=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 ----------
+#3 ----------
+#4 It pays to be multilingual.
+>empty 4
+>tree
+=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+   #2 ----------
+#3 ----------
+#4 ----------
+>list
+=
+== #1 What programming language should I learn? (4 messages)
+===
+#1 ----------
+#2 ----------
+#3 ----------
+#4 ----------
+>catalog
+#1 What programming language should I learn? (4 messages)
+>exit
+Bye! See you soon.
