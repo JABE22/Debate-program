@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package oope2018ht.viestit;
 
 import oope2018ht.apulaiset.Getteri;
@@ -13,24 +9,32 @@ import oope2018ht.tiedostot.Tiedosto;
 
 /**
  *
- * @author jarnomata
+ * @author Jarno Matarmaa
  * 
  * Viesti -luokka rakentuu puhtaasti tiedon ympärille. Sisältää viisi luokka
  * -muuttujaa, joihin voidaan asettaa tietoja settereillä ja kysyä tietoja
- * gettereillä. Lisäksi toteutettu viestien vertailuun ja tulosteluun liittyvät
- * metodit.
+ * gettereillä. Lisäksi luokassa on toteutettu viestien vertailuun ja tulosteluun 
+ * liittyvät metodit.
  */
 public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
     
-    private int viesti_id;
+    private int viesti_id; // Tunniste, jota voidaan käyttää myös indeksinä (OmaLista)
     private String viesti_sisalto;
     private Viesti vastaa; // Viestiolio, johon tämä viestiolio vastaa. (aloitusviesti -> null)
     private Tiedosto tiedosto; // Viestiin liitetty kuva tai video
     private OmaLista vastaukset;
     
+    /**
+     *
+     * @param tunniste viestin yksilöivä tunniste (indeksi)
+     * @param teksti viestin tekstisisältö
+     * @param vastattava viesti, johon tämä viesti vastaa
+     * @param tiedosto viestin mahdollinen tiedosto
+     * @throws IllegalArgumentException
+     */
     public Viesti(int tunniste, String teksti, Viesti vastattava, Tiedosto tiedosto) throws IllegalArgumentException {
-        if (teksti.isEmpty() || tunniste < 1) {
-            throw new IllegalArgumentException("Virhearvoja viestiolion parametreissa");
+        if (teksti == null || teksti.isEmpty() || tunniste < 1) {
+            throw new IllegalArgumentException();
         } else {
             this.viesti_id = tunniste;
             this.viesti_sisalto = teksti;
@@ -40,52 +44,121 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
         }
     }
     
-    // Getterit ja Setterit (9 kpl)
+    // Getterit ja Setterit (10 kpl)
+
+    /**
+     *
+     * @return viestin tunniste (vastaa myös indeksiä listalla)
+     */
     @Getteri
     public int getTunniste() {
         return viesti_id;
     }
     
+    /**
+     *
+     * @return palauttaa viestin sisältämän tekstin
+     */
     @Getteri
     public String getTeksti() {
         return viesti_sisalto;
     }
     
+    /**
+     *
+     * @return palauttaa viitteen viestiin, jos tämä viesti vastaa
+     */
     @Getteri
     public Viesti getVastaa() {
         return vastaa;
     }
     
+    /**
+     *
+     * @return palauttaa viitteen viestin sisältämään tiedostoon
+     */
     @Getteri
     public Tiedosto getTiedosto() {
         return tiedosto;
     }
 
+    /**
+     *
+     * @return palauttaa tämän viestin vastausviestit sisältävän OmaLista -olion
+     */
     @Getteri
     public OmaLista getVastaukset() {
         return vastaukset;
     }
 
+    /**
+     * Metodi ainoastaan WETO -testeille. Ei käytetä ohjelman toteutuksessa
+     *
+     * @param tunniste
+     * @throws IllegalArgumentException
+     */
     @Setteri
     public void setTunniste(int tunniste) throws IllegalArgumentException {
-        this.viesti_id = tunniste;
+        if (tunniste < 1) {
+            throw new IllegalArgumentException();
+        } else {
+            this.viesti_id = tunniste;
+        }
     }
 
+    /**
+     * Asettaa viestin tekstisisällön
+     *
+     * @param teksti uusi tekstisisältö
+     * @throws IllegalArgumentException
+     */
     @Setteri
     public void setTeksti(String teksti) throws IllegalArgumentException {
-        this.viesti_sisalto = teksti;
+        if (teksti == null || teksti.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else {
+            this.viesti_sisalto = teksti;
+        }
     }
     
+    /**
+     * Asettaa/muuttaa viestin, johon tämä viesti vastaa. Turha metodi tässä
+     * ratkaisussa. Ei käytössä, koska vastaa -viesti annetaan jo Viesti-olion 
+     * luontivaiheessa.
+     *
+     * @param viesti vastattava viesti
+     */
     @Setteri
     public void setVastaa(Viesti viesti) {
         this.vastaa = viesti;
     }
     
+    /**
+     * Asettaa/Liittää viestiin tiedoston. Myös tarpeeton, koska tiedosto asetetaan
+     * jo luontivaiheessa ja viesti voi sisältää vain yhden tiedoston.
+     *
+     * @param tiedosto
+     */
     @Setteri
     public void setTiedosto(Tiedosto tiedosto) {
         this.tiedosto = tiedosto;
-    }  
-    
+    }
+
+    /**
+     * Weto -testien metodi, ei käytössä tässä ohjelmassa. Asettaa vastaukset listan
+     * viestille.
+     *
+     * @param lista mahdollinen viestejä jo sisältävä lista vastauksia
+     * @throws IllegalArgumentException poikkeus null -arvoista
+     */
+    @Setteri
+    public void setVastaukset(OmaLista lista) throws IllegalArgumentException {
+        if (lista == null) {
+            throw new IllegalArgumentException();
+        } else {
+            this.vastaukset = lista;
+        }
+    }
     
     // Rajapinnan 'Komennettava' metodien toteutukset (3 kpl)
     @Override
@@ -95,10 +168,10 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
         }
         return (Viesti) this.vastaukset.hae(haettava);
     }
-
+    
     @Override
     public void lisaaVastaus(Viesti lisattava) throws IllegalArgumentException {
-        if (this.vastaukset == null || lisattava == null) {
+        if (vastaukset == null || lisattava == null || this.hae(lisattava) != null) {
             throw new IllegalArgumentException();
         } else {
             this.vastaukset.lisaa(lisattava);
@@ -147,7 +220,9 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
     }
     
     
-    // Oletustulostelu
+    /** 
+     * Oletustulostelumuoto ja viestin merkkijonomuotoinen esitys kutsuttaessa 
+     */
     @Override
     public String toString() {
         // Jos viestiin ei liity tiedostoa...

@@ -1,0 +1,14 @@
+add For testing purposes only
+catalog
+new The
+new quick
+new brown
+new fox
+new jumps
+new over
+new the
+new lazy
+new dog
+list
+catalog
+exit

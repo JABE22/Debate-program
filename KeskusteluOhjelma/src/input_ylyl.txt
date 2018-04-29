@@ -1,0 +1,26 @@
+add No YLYL thread. What is wrong with you?
+catalog
+head
+head 1
+new I really need to lighten up. Make me laugh, please.
+reply 1 Here, have a happy cat. &funny_cat.webm
+head 1
+head 2
+head 3
+new This is now a Spiderman thread! &out_of_blue_sky.gif
+reply 1 Dogs are funny, too. &puppies.jpg
+reply 4 Take this, Spidey! &arachnads.jpg
+tree
+empty 5
+tree
+reply 3 Take this, Spidey! &arachnads.jpg
+tree
+reply 6    &like_a_boss.jpg
+tree
+tail
+tail 1
+tail 2
+tail 6
+tail 7
+tail 8
+exit

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package oope2018ht.tiedostot;
 
 import oope2018ht.apulaiset.Getteri;
@@ -10,14 +6,22 @@ import oope2018ht.apulaiset.Setteri;
 
 /**
  *
- * @author jarnomata
+ * @author Jarno Matarmaa
+ * 
  */
 public class Kuva extends Tiedosto {
     
     private int leveys_px;
     private int korkeus_px;
     
-    
+    /**
+     *
+     * @param nimi tiedoston nimi
+     * @param koko levyllä
+     * @param leveys pixeliä
+     * @param korkeus pixeliä
+     * @throws IllegalArgumentException /tarkistaa leveyden ja korkeuden
+     */
     public Kuva(String nimi, int koko, int leveys, int korkeus) throws IllegalArgumentException {
         
         super(nimi, koko);
@@ -30,16 +34,28 @@ public class Kuva extends Tiedosto {
         }
     }
     
+    /**
+     *
+     * @return kuvan leveys pixeleinä
+     */
     @Getteri
     public int getLeveys() {
         return this.leveys_px;
     }
     
+    /**
+     *
+     * @return kuvan korkeus pixeleinä
+     */
     @Getteri
     public int getKorkeus() {
         return this.korkeus_px;
     }
     
+    /**
+     *
+     * @param uusiLeveys
+     */
     @Setteri
     public void setLeveys(int uusiLeveys) {
         if (uusiLeveys < 1) {
@@ -49,6 +65,10 @@ public class Kuva extends Tiedosto {
         }
     }
     
+    /**
+     *
+     * @param uusiKorkeus
+     */
     @Setteri
     public void setKorkeus(int uusiKorkeus) {
         if (uusiKorkeus < 1) {

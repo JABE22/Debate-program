@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package oope2018ht.omalista;
 
 import fi.uta.csjola.oope.lista.LinkitettyLista;
@@ -11,18 +7,22 @@ import oope2018ht.apulaiset.Ooperoiva;
 
 /**
  *
- * @author jarnomata
+ * @author Jarno Matarmaa
  * 
  * Tähän luokkaan on lisätty ainoastaan Ooperoiva- rajapinnan metodien 
  * toteutukset. OmaLista perii LinkitettyLista -luokan julkiset metodit, 
  * mutta "haeSolmu" -metodi on kopioitu sieltä tähän luokkaan, koska se on 
  * asetettu yksityiseksi tuntemattomasta syystä ja katsoin sen olevan 
  * hyödyllinen myös täällä.
+ * 
  */
 
 public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista>, 
                                                 Comparable<OmaLista> {
     
+    /**
+     * Linkitetty lista omilla variaatioilla
+     */
     public OmaLista() {
         
     }
@@ -50,18 +50,20 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista>,
         if (uusi == null || !(uusi instanceof Comparable)) {
             return false;
         }
-        
         // Verrattava solmu on aluksi pää -solmu
-        Solmu verrattava = this.paa();
+        Solmu solmu = this.paa();      
+        // Muunnokset, jotta alkioita voidaan vertailla (Object to Comparable)
+        Comparable verrattava;
+        Comparable lisattava = (Comparable)uusi;
         
-        // Selataan lista läpi indeksi-perusteisesti
         int indeksi = 0;
-        while (indeksi < koko() && verrattava != null) {
-            if (verrattava.alkio().toString().compareTo(uusi.toString()) >= 0) {
+        while (indeksi < koko() && solmu != null) {
+            verrattava = (Comparable)solmu.alkio();
+            if (verrattava.compareTo(lisattava) >= 0) {
                 super.lisaa(indeksi, uusi);
                 return true;
             }
-            verrattava = verrattava.seuraava();
+            solmu = solmu.seuraava(); // Varotoimenpide, indeksi ehkä riittäisi
             indeksi++;
         }
         // Jos tullaan tänne asti, lista oli joko tyhjä tai uusi solmu oli järjestyksessään 
@@ -111,8 +113,13 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva<OmaLista>,
         }
         return lista; 
     }
-    
-    // Hakee parametrina annetussa paikassa olevan solmun ja palauttaa sen
+
+    /**
+     * Hakee parametrina annetussa paikassa olevan solmun ja palauttaa sen.
+     * 
+     * @param paikka
+     * @return solmu, joka on annetussa indeksissä päästä lukien
+     */
     public Solmu haeSolmu(int paikka) {
       // Paikka kunnollinen.
       if (paikkaOK(paikka)) {

@@ -1,0 +1,11 @@
+catalog
+add We count to ten.
+catalog
+new one
+reply 1 two
+reply 1 three
+reply 1 four
+reply 1 nineteen &banana.gif
+tree
+catalog
+exit

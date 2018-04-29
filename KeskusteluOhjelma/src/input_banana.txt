@@ -1,0 +1,57 @@
+add What is the best chemical element? And why it is gold?
+add For testing purposes only
+add It is this thread ag-
+add No YLYL thread. What is wrong with you?
+catalog
+select 3
+find banana
+new There is a s- &ghillie.jpg
+reply 1 I do not see any s-
+reply 1 It think it came from-
+reply 1 Guys, where are you hiding? I invented a cure for cancer. You need first t-
+tree
+catalog
+select 4
+find banana
+find thread
+new I really need to lighten up. Make me laugh, please.
+list
+reply 1 Here, have a happy cat. &funny_cat.webm
+reply 5 Here, have a happy cat. &funny_cat.webm
+new This is now a Spiderman thread! &out_of_blue_sky.gif
+tree
+reply 5 Dogs are funny, too. &puppies.jpg
+reply 8 Take this, Spidey! &arachnads.jpg
+empty 9
+reply 7 Take this, Spidey! &arachnads.jpg
+tree
+catalog
+select 3
+tree
+new Too lazy to type?
+tree
+reply 11 We predent that there is a s-
+reply 12 *pretend
+reply 13 What?
+reply 14 -
+tree
+reply 5 Not sure if trolling or just stu- &fry.gif
+reply 11 Not sure if trolling or just stu- &fry.jpg
+reply 1 Call air support! Coordinates are-
+list
+tree
+new This thread needs more potassium. &banana.gif
+find banana
+find This thread
+reply 18 yuk foo
+tree
+find f
+catalog
+select 4
+tree
+find banana
+reply 4 - &like_a_boss.jpg
+reply 10 - &like_a_boss.jpg
+tree
+catalog
+exit

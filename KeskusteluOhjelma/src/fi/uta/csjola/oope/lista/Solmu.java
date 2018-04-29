@@ -61,7 +61,9 @@ public class Solmu {
    /** Korvataan Object-luokan metodi siten, että kutsutaan alkion metodia.
      * Jos tämä ei ole mahdollista, niin käytetään sittenkin kiltisti
      * Object-luokan metodia.
+     * @return 
      */
+   @Override
    public String toString() {
       if (alkio != null)
          return alkio.toString();

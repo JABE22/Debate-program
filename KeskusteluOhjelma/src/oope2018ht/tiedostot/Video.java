@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package oope2018ht.tiedostot;
 
 import oope2018ht.apulaiset.Getteri;
@@ -10,12 +6,19 @@ import oope2018ht.apulaiset.Setteri;
 
 /**
  *
- * @author jarnomata
+ * @author Jarno Matarmaa
  */
 public class Video extends Tiedosto {
     
     private double pituus;
     
+    /**
+     *
+     * @param nimi
+     * @param koko bitteinä levyllä
+     * @param pituus sekuntia
+     * @throws IllegalArgumentException pituus oltav suurempi kuin 0
+     */
     public Video(String nimi, int koko, double pituus) throws IllegalArgumentException {
         super(nimi, koko);
         if ( pituus > 0 ) {
@@ -25,11 +28,20 @@ public class Video extends Tiedosto {
         }
     }
     
+    /**
+     *
+     * @return pituus sekunteina
+     */
     @Getteri
     public double getPituus() {
         return this.pituus;
     }
     
+    /**
+     *
+     * @param pituus 
+     * @throws IllegalArgumentException
+     */
     @Setteri
     public void setPituus(double pituus) throws IllegalArgumentException{
         if (pituus <= 0) {
