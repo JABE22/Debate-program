@@ -71,9 +71,8 @@ public class Ketju implements Comparable<Ketju> {
      *
      * @param lkm viestien lukumäärä
      * @return Palauttaa null, jos vastauksia vähemmän kuin parametrina annettu
-     * lukumäärä ts. lkm ei sallitulla alueella (lkm < 0 || lkm >
-     * vastaukset.koko()), muutoin OmaLista -olion, joka sisältää vanhimmat
-     * viestit
+     * lukumäärä ts. lkm ei sallitulla alueella, muutoin OmaLista -olion, joka 
+     * sisältää vanhimmat viestit
      */
     public OmaLista getVanhatViestit(int lkm) {
         return this.vastaukset.annaAlku(lkm);
@@ -85,9 +84,8 @@ public class Ketju implements Comparable<Ketju> {
      *
      * @param lkm viestien lukumäärä
      * @return Palauttaa null, jos vastauksia vähemmän kuin parametrina annettu
-     * lukumäärä ts. lkm ei sallitulla alueella (lkm < 0 || lkm >
-     * vastaukset.koko()), muutoin OmaLista -olion, joka sisältää vanhimmat
-     * viestit
+     * lukumäärä ts. lkm ei sallitulla alueella, muutoin OmaLista -olion, joka 
+     * sisältää vanhimmat viestit
      */
     public OmaLista getUudetViestit(int lkm) {
         return this.vastaukset.annaLoppu(lkm);

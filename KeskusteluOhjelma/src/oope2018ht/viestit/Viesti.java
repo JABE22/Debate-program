@@ -30,7 +30,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
      * @param teksti viestin tekstisisältö
      * @param vastattava viesti, johon tämä viesti vastaa
      * @param tiedosto viestin mahdollinen tiedosto
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException viestin teksti null tai tunniste pienempi kuin 1
      */
     public Viesti(int tunniste, String teksti, Viesti vastattava, Tiedosto tiedosto) throws IllegalArgumentException {
         if (teksti == null || teksti.isEmpty() || tunniste < 1) {
@@ -94,8 +94,8 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
     /**
      * Metodi ainoastaan WETO -testeille. Ei käytetä ohjelman toteutuksessa
      *
-     * @param tunniste
-     * @throws IllegalArgumentException
+     * @param tunniste viestin tunniste (yksilöivä ID)
+     * @throws IllegalArgumentException tunnisteen arvo pienempi kuin 1
      */
     @Setteri
     public void setTunniste(int tunniste) throws IllegalArgumentException {
@@ -110,7 +110,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
      * Asettaa viestin tekstisisällön
      *
      * @param teksti uusi tekstisisältö
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException parametrina annettu teksti tyhjä tai null
      */
     @Setteri
     public void setTeksti(String teksti) throws IllegalArgumentException {
@@ -137,7 +137,7 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
      * Asettaa/Liittää viestiin tiedoston. Myös tarpeeton, koska tiedosto asetetaan
      * jo luontivaiheessa ja viesti voi sisältää vain yhden tiedoston.
      *
-     * @param tiedosto
+     * @param tiedosto aliittää viestiin parametrina saadun tiedoston
      */
     @Setteri
     public void setTiedosto(Tiedosto tiedosto) {
@@ -161,6 +161,14 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
     }
     
     // Rajapinnan 'Komennettava' metodien toteutukset (3 kpl)
+    /** {@inheritDoc}
+     * Hakee Viestin vastauksista parametrina annettua viestioliota.
+     * (vertaa tunnisteita).
+     * 
+     * @param haettava viesti, jota haetaan vastauksista.
+     * @return viite löydettyyn viestiin, tai null, jos mitään ei löytynyt
+     * @throws IllegalArgumentException jos annettu parametri on null
+     */
     @Override
     public Viesti hae(Viesti haettava) throws IllegalArgumentException {
         if (haettava == null) {
@@ -169,6 +177,11 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
         return (Viesti) this.vastaukset.hae(haettava);
     }
     
+    /** {@inheritDoc}
+     * 
+     * @param lisattava viestin vastaukset listalle lisättävä viesti-olio
+     * @throws IllegalArgumentException jos annettu parametri on null
+     */
     @Override
     public void lisaaVastaus(Viesti lisattava) throws IllegalArgumentException {
         if (vastaukset == null || lisattava == null || this.hae(lisattava) != null) {
@@ -178,6 +191,10 @@ public class Viesti implements Comparable<Viesti>, Komennettava<Viesti> {
         }
     }
     
+    /** {@inheritDoc}
+     * Poistaa viestin vanhan tekstisisällön ja tiedoston ja asettaa tekstiksi 
+     * "----------".
+     */
     @Override
     public void tyhjenna() {                  
         this.viesti_sisalto = Viesti.POISTETTUTEKSTI; // Rajapinnasta komennettava

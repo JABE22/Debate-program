@@ -270,7 +270,7 @@ public class KayttoLiittyma {
      *
      * @param osat tulisi sisältää vastattavan viestin tunnus ja sitä seuraava
      * viesti välimerkillä erotettuna. Viestissä voi olla mukana tiedosto, joka
-     * on eroteltuna tekstistä merkillä " &"
+     * on eroteltuna tekstistä väliöynti seuraavalla "et" merkillä
      */
     public void vastaaViestiin(String[] osat) {
         // Tulostusta varten tarvitaan tieto vastauksen lisäämisen onnistumisesta
@@ -342,7 +342,7 @@ public class KayttoLiittyma {
     }
 
     /**
-     * Tekee turvallisen lukumuunnoksen (String -> Integer).
+     * Tekee turvallisen lukumuunnoksen (String to Integer).
      *
      * @param syote käyttäjän antama mahdollinen luku
      * @return lukumuunnos tai virhetapauksissa -1.

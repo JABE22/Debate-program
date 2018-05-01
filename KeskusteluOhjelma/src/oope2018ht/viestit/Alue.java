@@ -122,9 +122,9 @@ public class Alue {
     /**
      * Lisää vastauksen aiemmin luotuun viestiin (komento "reply").
      *
-     * @param vastattava_id
-     * @param teksti
-     * @param tiedosto
+     * @param vastattava_id vastattavan viestin tunniste
+     * @param teksti vastaavan viestin teksti
+     * @param tiedosto vastaavan viestin mahdollinen tiedosto (voi olla null)
      * @return palautaa true, jos vastauksen lisääminen onnistuu ja false, jos
      * epäonnistuu
      */
